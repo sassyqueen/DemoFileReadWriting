@@ -1,6 +1,7 @@
 package demofilereadwriting.android.myapplicationdev.com.demofilereadwriting;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.PermissionChecker;
@@ -20,7 +21,7 @@ import java.io.FileWriter;
 public class MainActivity extends AppCompatActivity {
 
     TextView tv;
-    Button btnWrite, btnRead;
+    Button btnWrite, btnRead, btnStart, btnStop;
     String folderLocation;
 
 
@@ -32,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
         btnWrite = (Button) this.findViewById(R.id.btnWrite);
         btnRead = (Button) this.findViewById(R.id.btnRead);
         tv = (TextView) this.findViewById(R.id.tv);
+
+        btnStart = (Button) this.findViewById(R.id.btnStart);
+        btnStop = (Button) this.findViewById(R.id.btnStop);
+
 
 
         int permissionCheck = PermissionChecker.checkSelfPermission
@@ -107,6 +112,24 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, MyService.class);
+                startService(i);
+            }
+        });
+
+        btnStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, MyService.class);
+                stopService(i);
+            }
+        });
+
 
 
     }
